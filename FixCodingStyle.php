@@ -29,7 +29,7 @@
         }
     }
     ?>
-    <form class="form" action = "process.php"  method="post">
+    <form class="form" action = ""  method="post">
         First Name:<br>
         <input type="text" name="first_name">
         <spam>*<?php echo $firstNameError; ?></spam><br><br>
