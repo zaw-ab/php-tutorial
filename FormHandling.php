@@ -1,31 +1,39 @@
-<?php include 'functions.php'; ?>
 <?php
+include 'functions.php';
+
 $errors = array();
 $input  = array();
+$success = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($_POST['first_name'])) {
+    $input['first_name']    = sanitize($_POST['first_name']);
+    $input['last_name']     = sanitize($_POST['last_name']);
+    $input['gender']        = isset($_POST['gender']) ? sanitize($_POST['gender']) : null;
+
+    if (empty($input['first_name'])) {
         $errors[] = "First Name is required.";
-    } else {
-        $input[] = test_input($_POST['first_name']);
     }
-    {
-    if (empty($_POST['last_name'])) {
-            $errors[] = "Last Name is required.";
-    } else {
-        $input[] = test_input($_POST['last_name']);
+
+    if (empty($input['last_name'])) {
+        $errors[] = "Last Name is required.";
     }
+
+    if (empty($input['gender'])) {
+        $errors[] = "Gender is required.";
     }
-    if (empty($_POST['Gender'])) {
-            $errors[] = "Gender is required.";
-    } else {
-        $input[] =test_input($_POST['Gender']);
-    }
-    // ...
 
     if (count($errors) === 0) {
         // error free
         // db operation
+        include 'process.php';
+
+        if ($success) {
+            header('Location: FormResult.php?success=1');
+            exit;
+        } else {
+            header('Location: FormResult.php?success=0');
+            exit;
+        }
     }
 }
 ?>
@@ -35,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <style type="text/css">
         .error {
             color: red;
-        }
+               }
     </style>
 </head>
 <body>
@@ -61,9 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div>
         <lable>Gender:</lable>
             <div>
-        <input type="radio" name="Gender" value="male">Male
-        <input type="radio" name="Gender" value="female">Female
-            </div>
+        <input type="radio" name="gender" value="male">Male
+        <input type="radio" name="gender" value="female">Female
         </div>
         <div>
         <input type="submit" name="submit" value="Submit">
