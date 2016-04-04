@@ -1,18 +1,15 @@
-<?php include 'dbConnect.php';?>
-    <?php
-        $firstname = $_POST['first_name'];
-        $lastname  = $_POST['last_name'];
-        $gender    = $_POST['Gender'];
+<?php
+include 'dbConnect.php';
 
-        mysqli_query($connect, "INSERT INTO user(First_Name,Last_Name,Gender)
-         VALUES('$firstname','$lastname','$gender')");
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $sql = 'INSERT INTO users (first_name, last_name, gender) VALUES ("%s", "%s", "%s")';
+    $sql = sprintf($sql, $input['first_name'], $input['last_name'], $input['gender']);
+    mysqli_query($connect, $sql);
 
     if (mysqli_affected_rows($connect) > 0) {
-            echo "<p>***Congratz! User have been Added to the database***</p>";
-            echo "<a href = 'FormHandling.php'>Go Back</a>";
+        $success = true;
     } else {
-                echo "Sorry!User have NOT been Added<br/>";
-                echo mysqli_error($connect);
-                echo "<a href = 'FormHandling.php'>Go Back</a>";
+        $success = false;
     }
-    ?>
+}
