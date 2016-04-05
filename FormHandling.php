@@ -15,17 +15,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($input['first_name'])) {
         $errors[] = "First Name is required.";
     }
+    if (!preg_match("/^[a-zA-Z ]*$/", $input['first_name'])) {
+        $errors[] = "Enter Valid First Name";
+    }
 
     if (empty($input['last_name'])) {
         $errors[] = "Last Name is required.";
     }
+    if (!preg_match("/^[a-zA-Z ]*$/", $input['last_name'])) {
+        $errors[] = "Enter Valid Last Name";
+    }
+
+    if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Invalid email format";
+    }
 
     if (empty($input['gender'])) {
         $errors[] = "Gender is required.";
-    }
-
-    if (empty($input['email'])) {
-        $errors[] = "Enter your Email";
     }
 
     if (count($errors) === 0) {
