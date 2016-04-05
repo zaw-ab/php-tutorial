@@ -2,7 +2,12 @@
 include 'functions.php';
 
 $errors  = array();
-$input   = array();
+$input   = array(
+    'first_name' => '',
+    'last_name'  => '',
+    'email'      => '',
+    'comment'    => ''
+);
 $success = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -72,22 +77,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form class="form" action="" method="post">
         <div>
             <label>First Name:</label>
-            <div><input type="text" name="first_name"></div>
+            <div><input type="text" name="first_name" value="<?php echo $input['first_name']; ?>"></div>
         </div>
         <div>
             <label>Last Name:</label>
-            <div><input type="text" name="last_name"></div>
+            <div><input type="text" name="last_name" value="<?php echo $input['last_name']; ?>"></div>
         </div>
         <div>
             <label>Email:</label>
-            <div><input type="text" name="email"></div>
+            <div><input type="text" name="email" value="<?php echo $input['email']; ?>"></div>
         </div>
         <div>
             <label>
                 Comment:
             </label>
             <div>
-                <textarea name="comment" rows="5" cols="40"></textarea>
+                <textarea name="comment" rows="5" cols="40"><?php echo $input['comment']; ?></textarea>
             </div>
         </div>
         <div>
