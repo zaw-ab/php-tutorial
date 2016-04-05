@@ -64,7 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </style>
 </head>
 <body>
-    <h1>PhP Form Handling</h1>
+    <fieldset>
+    <legend style="color: green;"><h1>PhP Form Handling</h1></legend>
     <?php
     if (count($errors)) {
         foreach ($errors as $err) {
@@ -74,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     ?>
-    <form class="form" action="" method="post">
+    <form style="color: blue;" action="" method="post">
         <div>
             <label>First Name:</label>
             <div><input type="text" name="first_name" value="<?php echo $input['first_name']; ?>"></div>
@@ -106,5 +107,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="reset" name="reset" value="Clear">
         </div>
     </form>
+        </fieldset>
 </body>
 </html>
