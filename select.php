@@ -40,6 +40,8 @@ if (mysqli_num_rows($result) > 0) {
             <th>Email</th>
             <th>Comment</th>
             <th>Gender</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
         <tr>
@@ -49,6 +51,8 @@ if (mysqli_num_rows($result) > 0) {
             <td><?php echo $row['Email']; ?></td>
             <td><?php echo $row['comment']; ?></td>
             <td><?php echo $row['gender']; ?></td>
+            <td><a href= 'UpdateForm.php'>Edit</a></td>
+            <td><a href= ''>Delete</a></td>
         </tr>
         <?php } ?>
     </table>
