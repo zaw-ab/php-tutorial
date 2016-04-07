@@ -6,7 +6,6 @@ if ($success) {
     echo "<p>***Congratz! User have been Added to the database***</p>";
     echo "<a href = 'FormHandling.php'>Go Back</a>";
 } else {
-    echo "Sorry!User have NOT been Added<br/>
-          Your Email have been used<br/>";
+    echo "Sorry!User have NOT been Added<br/>";
     echo "<a href = 'FormHandling.php'>Go Back</a>";
 }
