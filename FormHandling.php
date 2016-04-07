@@ -1,5 +1,8 @@
 <?php
+include 'dbConnect.php';
 include 'functions.php';
+
+$userId = isset($_GET['id']) ? $_GET['id'] : 0;
 
 $errors  = array();
 $input   = array(
@@ -9,6 +12,17 @@ $input   = array(
     'comment'    => ''
 );
 $success = false;
+
+if ($userId) {
+    $sql = "SELECT * FROM users WHERE User_ID=$userId";
+    $result = mysqli_query($connect, $sql);
+    if ($row = mysqli_fetch_assoc($result)) {
+        $input['first_name'] = $row['first_name'];
+        $input['last_name']   = $row['last_name'];
+        $input['email']      = $row['Email'];
+        $input['comment']    = $row['comment'];
+    }
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $input['first_name']    = sanitize($_POST['first_name']);
@@ -76,6 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     ?>
     <form style="color: blue;" action="" method="post">
+        <input type="hidden" name="id" value="<?php echo $userId; ?>">
         <div>
             <label>First Name:</label>
             <div><input type="text" name="first_name" value="<?php echo $input['first_name']; ?>"></div>
@@ -98,8 +113,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div>
         <lable>Gender:</lable>
-            <div>
-        <input type="radio" name="gender" value="male">Male
+        <div>
+        <input type="radio" name="gender" value="male" checked="checked">Male
         <input type="radio" name="gender" value="female">Female
         </div>
         <div>
