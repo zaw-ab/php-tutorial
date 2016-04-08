@@ -9,18 +9,19 @@ $input   = array(
     'first_name' => '',
     'last_name'  => '',
     'email'      => '',
-    'comment'    => ''
+    'comment'    => '',
+    'id'         => ''
 );
 $success = false;
 
 if ($userId) {
-    $sql = "SELECT * FROM users WHERE User_ID=$userId";
+    $sql = "SELECT * FROM users WHERE User_ID= $userId";
     $result = mysqli_query($connect, $sql);
     if ($row = mysqli_fetch_assoc($result)) {
-        $input['first_name'] = $row['first_name'];
+        $input['first_name']  = $row['first_name'];
         $input['last_name']   = $row['last_name'];
-        $input['email']      = $row['Email'];
-        $input['comment']    = $row['comment'];
+        $input['email']       = $row['Email'];
+        $input['comment']     = $row['comment'];
     }
 }
 
@@ -30,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $input['gender']        = isset($_POST['gender']) ? sanitize($_POST['gender']) : null;
     $input['email']         = sanitize($_POST['email']);
     $input['comment']       = sanitize($_POST['comment']);
+    $input['id']            = sanitize($_POST['id']);
 
     if (empty($input['first_name'])) {
         $errors[] = "First Name is required.";
@@ -89,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     ?>
-    <form style="color: blue;" action="" method="post">
+    <form style="color: grey;" action="" method="post">
         <input type="hidden" name="id" value="<?php echo $userId; ?>">
         <div>
             <label>First Name:</label>
