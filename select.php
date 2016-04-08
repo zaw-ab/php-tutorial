@@ -51,8 +51,8 @@ if (mysqli_num_rows($result) > 0) {
             <td><?php echo $row['Email']; ?></td>
             <td><?php echo $row['comment']; ?></td>
             <td><?php echo $row['gender']; ?></td>
-            <td><a href= 'UpdateForm.php'>Edit</a></td>
-            <td><a href= ''>Delete</a></td>
+            <td><a href= "FormHandling.php?id=<?php echo $row['User_ID']; ?>">Edit</a></td>
+            <td><a href= "Deleteprocess.php?id=<?php echo $row['User_ID'];?>">Delete</a></td>
         </tr>
         <?php } ?>
     </table>
