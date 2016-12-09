@@ -4,6 +4,7 @@
     </head>
     <body>
         <h1>Date and Time</h1>
+        <h1>push testing</h1>
         <?php
         echo "Today is " . date("d.m.Y h.i.sa l") . "<br>";
 
